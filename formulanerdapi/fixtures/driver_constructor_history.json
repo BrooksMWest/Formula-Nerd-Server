@@ -1,0 +1,72 @@
+[
+  {
+    "model": "formulanerdapi.driver_constructor_history",
+    "pk": 1,
+    "fields": {
+        "driver_id": 1,
+        "constructor_id": 3,
+        "start_year": 2007,
+        "end year": 2012
+    }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 1,
+      "constructor_id": 2,
+      "start_year": 2013,
+      "end year": 2024
+  }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 1,
+      "constructor_id": 2,
+      "start_year": 2012,
+      "end year": null
+  }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 2,
+      "constructor_id": 5,
+      "start_year": 2016,
+      "end year": null
+  }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 3,
+      "constructor_id": 2,
+      "start_year": 2019,
+      "end year": null
+  }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 4,
+      "constructor_id": 5,
+      "start_year": 2021,
+      "end year": 2024
+  }
+},
+{
+  "model": "formulanerdapi.driver_constructor_history",
+  "pk": 1,
+  "fields": {
+      "driver_id": 4,
+      "constructor_id": 3,
+      "start_year": 2013,
+      "end year": 2014
+  }
+}
+]

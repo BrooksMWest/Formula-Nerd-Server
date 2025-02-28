@@ -1,50 +1,122 @@
 [
   {
-      "model": "formulanerdapi.circuit",
+      "model": "formulanerdapi.constructor",
       "pk": 1,
       "fields": {
           "name": "Mercedes AMG Petronas",
           "location": "Brackley, England",
           "nation_id": 5,
           "is_engine_manufacturer": true,
-          "about": "They're German, but the team is out of the UK. Known as The Silver Arrows, Mercedes has a long history with several Champions including Sterling Moss, Nico Rosberg, and the Great Lewis Hamilton",
+          "about": "They're German, but the team is out of the UK. Known as The Silver Arrows, Mercedes has a long history with several Champions including Stirling Moss, Nico Rosberg, and the great Lewis Hamilton.",
           "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/mercedes"
       }
   },
   {
-    "model": "formulanerdapi.circuit",
+    "model": "formulanerdapi.constructor",
     "pk": 2,
     "fields": {
         "name": "Ferrari",
         "location": "Maranello, Italy",
         "nation_id": 3,
         "is_engine_manufacturer": true,
-        "about": "Ferrari has been around sinc the start of F1. The cars are red and sometimes very fast. Fans are called Tifosi.",
+        "about": "Ferrari has been around since the start of F1. The cars are red and sometimes very fast. Fans are called Tifosi.",
         "constructor_image_url": "https://assets.turbologo.com/blog/en/2019/10/19084952/ferrari-logo-illustration-958x575.jpg"
     }
-},
-{
-  "model": "formulanerdapi.circuit",
-  "pk": 3,
-  "fields": {
-      "name": "McClaren",
-      "location": "Woking, Surrey, England",
-      "nation_id": 1,
-      "is_engine_manufacturer": false,
-      "about": "vRnMCReJzUPsStN6xWeyOcOwJ793",
-      "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/mclaren"
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 3,
+    "fields": {
+        "name": "McLaren",
+        "location": "Woking, Surrey, England",
+        "nation_id": 1,
+        "is_engine_manufacturer": false,
+        "about": "McLaren is the best! They have orange cars and cool drivers.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/mclaren"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 4,
+    "fields": {
+        "name": "Haas",
+        "location": "Kannapolis, NC, USA",
+        "nation_id": 2,
+        "is_engine_manufacturer": false,
+        "about": "The only American team in F1. They have never had a race win.",
+        "constructor_image_url": "https://cdn.mos.cms.futurecdn.net/uuQxV8xeSFh3PpnuzAyKKV.png"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 5,
+    "fields": {
+        "name": "Red Bull Racing",
+        "location": "Milton Keynes, England",
+        "nation_id": 5,
+        "is_engine_manufacturer": true,
+        "about": "Red Bull has dominated modern F1 with multiple championships from Sebastian Vettel and Max Verstappen.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/red-bull-racing"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 6,
+    "fields": {
+        "name": "Aston Martin",
+        "location": "Silverstone, England",
+        "nation_id": 1,
+        "is_engine_manufacturer": false,
+        "about": "Aston Martin returned to F1 in 2021. They have a British racing green livery.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/aston-martin"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 7,
+    "fields": {
+        "name": "Alpine",
+        "location": "Enstone, England",
+        "nation_id": 4,
+        "is_engine_manufacturer": true,
+        "about": "Formerly Renault, Alpine is the French manufacturer trying to climb back up the grid.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/alpine"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 8,
+    "fields": {
+        "name": "Williams",
+        "location": "Grove, England",
+        "nation_id": 1,
+        "is_engine_manufacturer": false,
+        "about": "One of the most successful teams in history, Williams has fallen on hard times in recent years.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/williams"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 9,
+    "fields": {
+        "name": "RB (Visa Cash App RB)",
+        "location": "Faenza, Italy",
+        "nation_id": 3,
+        "is_engine_manufacturer": false,
+        "about": "Previously AlphaTauri and Toro Rosso, RB is Red Bull’s junior team focused on developing young drivers.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/alphatauri"
+    }
+  },
+  {
+    "model": "formulanerdapi.constructor",
+    "pk": 10,
+    "fields": {
+        "name": "Kick Sauber",
+        "location": "Hinwil, Switzerland",
+        "nation_id": 6,
+        "is_engine_manufacturer": false,
+        "about": "Previously Alfa Romeo, Sauber is transitioning into an Audi works team for 2026.",
+        "constructor_image_url": "https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_1320/content/dam/fom-website/2018-redesign-assets/team%20logos/alfa-romeo"
+    }
   }
-},
-{
-  "model": "formulanerdapi.circuit",
-  "pk": 4,
-  "fields": {
-      "name": "Haas",
-      "location": "Kannapolis, NC",
-      "nation_id": 2,
-      "is_engine_manufacturer": false,
-      "about": "The only American Team in F1. They have never had a race win",
-      "constructor_image_url": "https://cdn.mos.cms.futurecdn.net/uuQxV8xeSFh3PpnuzAyKKV.png"
-  }
-}
 ]

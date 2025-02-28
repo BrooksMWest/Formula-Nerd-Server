@@ -1,0 +1,13 @@
+[
+  {
+    "model": "formulanerdapi.user",
+    "pk": 1,
+    "fields": {
+        "UID": "vRnMCReJzUPsStN6xWeyOcOwJ793",
+        "name": "Brooksie Wooksie",
+        "nation_id": 27,
+        "favorite_driver_id": 5,
+        "favorite_circuit_id": 1
+    }
+}
+]

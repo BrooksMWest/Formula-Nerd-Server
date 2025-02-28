@@ -1,0 +1,170 @@
+[
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 1,
+      "fields": {
+          "name": "Lewis Hamilton",
+          "age": 40,
+          "nation_id": 12,
+          "current_constructor_id": 2,
+          "about": "Some say he's the greatest of all time. He was by all accounts robbed of the world Championship in Abu Dhabi in 2021.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Lewis_Hamilton_2022_S%C3%A3o_Paulo_Grand_Prix_%2852498120773%29_%28cropped%29.jpg/640px-Lewis_Hamilton_2022_S%C3%A3o_Paulo_Grand_Prix_%2852498120773%29_%28cropped%29.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 2,
+      "fields": {
+          "name": "Max Verstappen",
+          "age": 26,
+          "nation_id": 3,
+          "current_constructor_id": 1,
+          "about": "Two-time World Champion and one of the most dominant drivers of his generation.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Max_Verstappen_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 3,
+      "fields": {
+          "name": "Charles Leclerc",
+          "age": 26,
+          "nation_id": 18,
+          "current_constructor_id": 3,
+          "about": "Ferrari's star driver, known for his speed and consistency.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Charles_Leclerc_2019.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 4,
+      "fields": {
+          "name": "Sergio Perez",
+          "age": 34,
+          "nation_id": 16,
+          "current_constructor_id": 1,
+          "about": "Max Verstappen's teammate at Red Bull, known for his resilience and great racecraft.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Sergio_Pérez_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 5,
+      "fields": {
+          "name": "Lando Norris",
+          "age": 24,
+          "nation_id": 12,
+          "current_constructor_id": 4,
+          "about": "One of McLaren's brightest stars, known for his charisma and racing talent.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Lando_Norris_2020.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 6,
+      "fields": {
+          "name": "Carlos Sainz",
+          "age": 29,
+          "nation_id": 18,
+          "current_constructor_id": 3,
+          "about": "Ferrari's second driver, equally talented and quick.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Carlos_Sainz_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 7,
+      "fields": {
+          "name": "Fernando Alonso",
+          "age": 42,
+          "nation_id": 23,
+          "current_constructor_id": 5,
+          "about": "The two-time World Champion who made a comeback with Aston Martin after a hiatus.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fernando_Alonso_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 8,
+      "fields": {
+          "name": "Pierre Gasly",
+          "age": 27,
+          "nation_id": 10,
+          "current_constructor_id": 6,
+          "about": "After leaving AlphaTauri, Gasly joined Alpine for 2023.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre_Gasly_2021.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 9,
+      "fields": {
+          "name": "Esteban Ocon",
+          "age": 27,
+          "nation_id": 10,
+          "current_constructor_id": 6,
+          "about": "A talented French driver, Esteban Ocon has been with Alpine since 2020.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Esteban_Ocon_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 10,
+      "fields": {
+          "name": "Valtteri Bottas",
+          "age": 34,
+          "nation_id": 24,
+          "current_constructor_id": 7,
+          "about": "The Finnish driver who moved to Alfa Romeo after his time at Mercedes.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Valtteri_Bottas_2021.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 11,
+      "fields": {
+          "name": "Zhou Guanyu",
+          "age": 24,
+          "nation_id": 9,
+          "current_constructor_id": 7,
+          "about": "China's first F1 driver, racing for Alfa Romeo alongside Valtteri Bottas.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Zhou_Guanyu_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 12,
+      "fields": {
+          "name": "Mick Schumacher",
+          "age": 24,
+          "nation_id": 11,
+          "current_constructor_id": 8,
+          "about": "The son of Michael Schumacher, Mick is working his way through the F1 ranks.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Mick_Schumacher_2021.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 13,
+      "fields": {
+          "name": "George Russell",
+          "age": 26,
+          "nation_id": 12,
+          "current_constructor_id": 2,
+          "about": "A talented British driver racing for Mercedes, known for his consistency and racecraft.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/George_Russell_2022.jpg"
+      }
+  },
+  {
+      "model": "formulanerdapi.driver",
+      "pk": 14,
+      "fields": {
+          "name": "Oscar Piastri",
+          "age": 23,
+          "nation_id": 3,
+          "current_constructor_id": 3,
+          "about": "The young Australian driver who joined McLaren in 2023, already showing impressive potential.",
+          "driver_image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Oscar_Piastri_2023.jpg"
+      }
+  }
+]
