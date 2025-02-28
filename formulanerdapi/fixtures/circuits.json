@@ -1,0 +1,67 @@
+[
+  {
+    "model": "formulanerdapi.circuit",
+    "pk": 1,
+    "fields": {
+        "name": "Spa-Francorchamps",
+        "nation_id": 6,
+        "length": "7.004 km (4.352 miles)",
+        "circuit_type": "Race Track",
+        "designer": "Jules de Thier and Henri Langlois van Ophem",
+        "year_built": "1921",
+        "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Spa-Francorchamps_of_Belgium.svg"
+    }
+},
+{
+    "model": "formulanerdapi.circuit",
+    "pk": 2,
+    "fields": {
+        "name": "Silverstone",
+        "nation_id": 12,
+        "length": "5.891 km (3.661 miles)",
+        "circuit_type": "Race Track",
+        "designer": "RAF Silverstone (original layout)",
+        "year_built": "1947",
+        "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Silverstone_Circuit_2020_layout.png"
+    }
+},
+{
+    "model": "formulanerdapi.circuit",
+    "pk": 3,
+    "fields": {
+        "name": "Monza",
+        "nation_id": 14,
+        "length": "5.793 km (3.600 miles)",
+        "circuit_type": "Race Track",
+        "designer": "Piero Puricelli",
+        "year_built": "1922",
+        "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Monza_track_map.svg"
+    }
+},
+{
+    "model": "formulanerdapi.circuit",
+    "pk": 4,
+    "fields": {
+        "name": "Suzuka",
+        "nation_id": 15,
+        "length": "5.807 km (3.608 miles)",
+        "circuit_type": "Race Track",
+        "designer": "Hans Hugenholtz",
+        "year_built": "1962",
+        "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Suzuka_Circuit_layout.png"
+    }
+},
+{
+    "model": "formulanerdapi.circuit",
+    "pk": 5,
+    "fields": {
+        "name": "Interlagos",
+        "nation_id": 7,
+        "length": "4.309 km (2.677 miles)",
+        "circuit_type": "Race Track",
+        "designer": "Wilson Fittipaldi Sr.",
+        "year_built": "1940",
+        "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Interlagos_track_map.png"
+    }
+}
+]

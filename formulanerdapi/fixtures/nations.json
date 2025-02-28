@@ -1,0 +1,314 @@
+[
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 1,
+      "fields": {
+          "name": "Argentina",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 2,
+      "fields": {
+          "name": "Austria",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Austria.svg/1200px-Flag_of_Austria.svg.png"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 3,
+      "fields": {
+          "name": "Australia",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 4,
+      "fields": {
+          "name": "Azerbaijan",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_Azerbaijan.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 5,
+      "fields": {
+          "name": "Bahrain",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Bahrain.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 6,
+      "fields": {
+          "name": "Belgium",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Belgium.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 7,
+      "fields": {
+          "name": "Brazil",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 8,
+      "fields": {
+          "name": "Canada",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 9,
+      "fields": {
+          "name": "China",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 10,
+      "fields": {
+          "name": "France",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 11,
+      "fields": {
+          "name": "Germany",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 12,
+      "fields": {
+          "name": "United Kingdom",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 13,
+      "fields": {
+          "name": "Hungary",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Flag_of_Hungary.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 14,
+      "fields": {
+          "name": "Italy",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 15,
+      "fields": {
+          "name": "Japan",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 16,
+      "fields": {
+          "name": "Mexico",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg"
+      }
+  },
+  {
+      "model": "formulanerdapi.nation",
+      "pk": 17,
+      "fields": {
+          "name": "Monaco",
+          "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Flag_of_Monaco.svg"
+      }
+  },
+  {
+    "model": "formulanerdapi.nation",
+    "pk": 18,
+    "fields": {
+        "name": "Netherlands",
+        "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg"
+    }
+},
+{
+    "model": "formulanerdapi.nation",
+    "pk": 19,
+    "fields": {
+        "name": "Portugal",
+        "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg"
+    }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 20,
+  "fields": {
+      "name": "Singapore",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Singapore.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 21,
+  "fields": {
+      "name": "South Africa",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 22,
+  "fields": {
+      "name": "South Korea",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 23,
+  "fields": {
+      "name": "Spain",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 24,
+  "fields": {
+      "name": "Sweden",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 25,
+  "fields": {
+      "name": "Switzerland",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Switzerland.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 26,
+  "fields": {
+      "name": "United Arab Emirates",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 27,
+  "fields": {
+      "name": "United States",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 28,
+  "fields": {
+      "name": "Indonesia",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 29,
+  "fields": {
+      "name": "Malaysia",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 30,
+  "fields": {
+      "name": "Turkey",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 31,
+  "fields": {
+      "name": "Russia",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 32,
+  "fields": {
+      "name": "Saudi Arabia",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Saudi_Arabia.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 33,
+  "fields": {
+      "name": "Qatar",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 34,
+  "fields": {
+      "name": "India",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 35,
+  "fields": {
+      "name": "Morocco",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 36,
+  "fields": {
+      "name": "Czechia",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_Czech_Republic.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 32,
+  "fields": {
+      "name": "Thailand",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 33,
+  "fields": {
+      "name": "Finland",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Finland.svg"
+  }
+},
+{
+  "model": "formulanerdapi.nation",
+  "pk": 34,
+  "fields": {
+      "name": "Denmark",
+      "flag_image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Flag_of_Denmark.svg"
+  }
+}
+]

@@ -1,4 +1,4 @@
-"""tunapiano URL Configuration
+"""formulanerd URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -13,9 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'users', UserView, 'user')
+router.register(r'drivers', DriverView, 'driver')
+router.register(r'circuits', CircuitView, 'circuit')
+router.register(r'races', RaceView, 'race')
+router.register(r'constructors', ConstructorView, 'constructor')
+router.register(r'driver_constructor_histories', DriverConstructorHistoryView, 'driver_constructor_history')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
 ]
