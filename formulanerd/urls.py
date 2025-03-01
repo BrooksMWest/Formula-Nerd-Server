@@ -1,8 +1,13 @@
 from rest_framework import routers
 from django.contrib import admin
-from django.urls import path 
+from django.urls import include, path 
 from formulanerdapi.views import CircuitView
 from formulanerdapi.views import NationView
+from formulanerdapi.views import DriverView
+from formulanerdapi.views import UserView
+from formulanerdapi.views import RaceView
+from formulanerdapi.views import ConstructorView
+from formulanerdapi.views import DriverConstructorHistoryView
 """formulanerd URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
