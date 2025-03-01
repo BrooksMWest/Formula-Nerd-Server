@@ -1,6 +1,8 @@
 from rest_framework import routers
 from django.contrib import admin
 from django.urls import path 
+from formulanerdapi.views import CircuitView
+from formulanerdapi.views import NationView
 """formulanerd URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -23,6 +25,7 @@ router.register(r'circuits', CircuitView, 'circuit')
 router.register(r'races', RaceView, 'race')
 router.register(r'constructors', ConstructorView, 'constructor')
 router.register(r'driver_constructor_histories', DriverConstructorHistoryView, 'driver_constructor_history')
+router.register(r'nations', NationView, 'nation')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
