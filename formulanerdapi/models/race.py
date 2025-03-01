@@ -1,14 +1,10 @@
 from django.db import models
-
-class Nation(models.Model):
-    name = models.CharField(max_length=100)
-
-class Driver(models.Model):
-    name = models.CharField(max_length=75)
-
+from .nation import Nation
+from .driver import Driver
+from .circuit import Circuit
 class Race(models.Model):
   name = models.CharField(max_length=75)
-  circuit = models.CharField(max_length=50)
+  circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
   date = models.DateField()
   nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
   distance = models.CharField(max_length=25)
