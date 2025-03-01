@@ -1,10 +1,6 @@
 from django.db import models
-
-class Nation(models.Model):
-    name = models.CharField(max_length=100)
-
-class Driver(models.Model):
-    name = models.CharField(max_length=75)
+from .nation import Nation
+from .driver import Driver
 
 class User(models.Model):
 
