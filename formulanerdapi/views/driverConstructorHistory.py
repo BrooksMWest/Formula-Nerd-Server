@@ -3,18 +3,21 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from formulanerdapi.models import DriverConstructorHistory
-from formulanerdapi.models import Nation
+from formulanerdapi.models import Driver
+from formulanerdapi.models import Constructor
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 class DriverConstructorHistoryView(ViewSet):
-    """Level up circuit view"""
+    """ driverConstructorHistory view"""
 
     def retrieve(self, request, pk):
-        """Handle GET requests for single circuit
+        """Handle GET requests for drivers that have driven for a constructor
+
 
         Returns:
-            Response -- JSON serialized circuit
+            Response -- JSON serialized driverConstructorHistory
+
         """
         driverConstructorHistory = DriverConstructorHistory.objects.get(pk=pk)
         serializer = DriverConstructorHistorySerializer(driverConstructorHistory)
@@ -22,7 +25,7 @@ class DriverConstructorHistoryView(ViewSet):
 
 
     def list(self, request):
-        """Handle GET requests to get all circuits
+        """Handle GET requests to get all driver constructor histories
 
         Returns:
             Response -- JSON serialized list of circuits
@@ -33,84 +36,74 @@ class DriverConstructorHistoryView(ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        """Handle POST operations
-
-        Returns:
-            Response -- JSON serialized circuit instance or error message
-        """
+        """Handle POST operations"""
         try:
-            nation_id = request.data["nation_id"]
-            nation = Nation.objects.get(pk=nation_id)
+            driver = Driver.objects.get(pk=request.data["driver_id"])
+            constructor = Constructor.objects.get(pk=request.data["constructor_id"])
 
-            circuit = Circuit.objects.create(
-            name=request.data["name"],
-            nation=nation,  
-            length=request.data["length"],
-            circuit_type=request.data["circuit_type"],
-            designer=request.data["designer"],
-            year_built=request.data["year_built"]
-            )     
+            driver_constructor_history = DriverConstructorHistory.objects.create(
+                driver=driver,
+                constructor=constructor,
+                start_year=request.data.get("start_year"),
+                end_year=request.data.get("end_year")
+            )
 
-            serializer = DriverConstructorHistorySerializer(circuit)
+            serializer = DriverConstructorHistorySerializer(driver_constructor_history)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+        except Driver.DoesNotExist:
+            return Response({"error": "Driver not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Constructor.DoesNotExist:
+            return Response({"error": "Constructor not found"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
-            # Handle missing fields
-          return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
-        except ObjectDoesNotExist:
-          return Response({"error": "circuit or related object not found."}, status=status.HTTP_400_BAD_REQUEST)
-
-        except Exception as e:
-        # Catch-all for any other errors
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    
 
     def update(self, request, pk):
-        """Handle PUT requests for a circuit
+        """Handle PUT requests for a driverConstructorHistory"""
 
-        Returns:
-            Response -- Empty body with 204 status code or error message
-        """
         try:
-            circuit = Circuit.objects.get(pk=pk)
+            driver_constructor_history = DriverConstructorHistory.objects.get(pk=pk)
 
-            nation_id = request.data.get(pk=nation_id)
-            if nation_id:
-                try:
-                    nation = Nation.objects.get("nation_id")
-                    circuit.nation = nation
-                except Nation.DoesNotExist:
-                    return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
-                
-            circuit.name = request.data.get["name", circuit.name]
-            circuit.length=request.data["length", circuit.length]
-            circuit.circuit_type=request.data["circuit_type", circuit.circuit_type]
-            circuit.designer=request.data["designer", circuit.designer]
-            circuit.year_built=request.data["year_built", circuit.year_built]
-            circuit.circuit_image_url=request.data["circuit_image_url", circuit.circuit_image_url]
-            circuit.save()
+            # Retrieve related objects to avoid ForeignKey constraint issues
+            driver = Driver.objects.get(pk=request.data["driver_id"])
+            constructor = Constructor.objects.get(pk=request.data["constructor_id"])
 
-            serializer = DriverConstructorHistorySerializer(circuit)
-            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-        except circuit.DoesNotExist:
-            raise Http404("circuit not found")
+            driver_constructor_history.driver = driver
+            driver_constructor_history.constructor = constructor
+            driver_constructor_history.start_year = request.data.get("start_year", driver_constructor_history.start_year)
+            driver_constructor_history.end_year = request.data.get("end_year", driver_constructor_history.end_year)
+
+            driver_constructor_history.save()
+
+            serializer = DriverConstructorHistorySerializer(driver_constructor_history)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Driver.DoesNotExist:
+            return Response({"error": "Driver not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Constructor.DoesNotExist:
+            return Response({"error": "Constructor not found"}, status=status.HTTP_404_NOT_FOUND)
+        except DriverConstructorHistory.DoesNotExist:
+            return Response({"error": "DriverConstructorHistory not found"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
             return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
         
     def destroy(self, request, pk):
         try:
-            circuit = Circuit.objects.get(pk=pk)
-            circuit.delete()
+            driverConstructorHistory = DriverConstructorHistory.objects.get(pk=pk)
+            driverConstructorHistory.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
-        except Circuit.DoesNotExist:
-            raise Http404("Circuit not found")
+        except DriverConstructorHistory.DoesNotExist:
+            return Response({"error": "DriverConstructorHistory not found"}, status=status.HTTP_404_NOT_FOUND)
+
 
 class DriverConstructorHistorySerializer(serializers.ModelSerializer):
-    """JSON serializer for circuits
-    """
+    """JSON serializer for driver constructor history"""
+
+    driver_id = serializers.PrimaryKeyRelatedField(queryset=Driver.objects.all())
+    constructor_id = serializers.PrimaryKeyRelatedField(queryset=Constructor.objects.all())
+
     class Meta:
-        model = Circuit
+        model = DriverConstructorHistory
         depth =1
-        fields = ('id', 'name', 'nation_id', 'length', 'circuit_type', 'designer', 'year_built', 'circuit_image_url')
+        fields = ('id', 'driver_id', 'constructor_id', 'start_year', 'end_year')
