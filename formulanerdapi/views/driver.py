@@ -41,15 +41,19 @@ class DriverView(ViewSet):
         """
         try:
             nation_id = request.data["nation_id"]
+            constructor_id = request.data["constructor_id"]
+
+            current_constructor = Constructor.objects.get(pk=constructor_id)
             nation = Nation.objects.get(pk=nation_id)
 
             driver = Driver.objects.create(
             name=request.data["name"],
+            age=request.data["age"],
+            gender=request.data["gender"],
             nation=nation,  
-            length=request.data["length"],
-            driver_type=request.data["driver_type"],
-            designer=request.data["designer"],
-            year_built=request.data["year_built"]
+            current_constructor=current_constructor,
+            about=request.data["about"],
+            driver_image_url=request.data["driver_image_url"]
             )     
 
             serializer = DriverSerializer(driver)
@@ -75,27 +79,28 @@ class DriverView(ViewSet):
             Response -- Empty body with 204 status code or error message
         """
         try:
-            driver = driver.objects.get(pk=pk)
+            driver = Driver.objects.get(pk=pk)
 
-            nation_id = request.data.get(pk=nation_id)
+            nation_id = request.data.get("nation_id")
             if nation_id:
                 try:
-                    nation = Nation.objects.get("nation_id")
+                    nation = Nation.objects.get(pk=nation_id)
                     driver.nation = nation
                 except Nation.DoesNotExist:
                     return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
                 
-            driver.name = request.data.get["name", driver.name]
-            driver.length=request.data["length", driver.length]
-            driver.driver_type=request.data["driver_type", driver.driver_type]
-            driver.designer=request.data["designer", driver.designer]
-            driver.year_built=request.data["year_built", driver.year_built]
-            driver.driver_image_url=request.data["driver_image_url", driver.driver_image_url]
+            driver.name = request.data.get("name", driver.name)
+            driver.age=request.data("age", driver.age)
+            driver.gender=request.data("gender", driver.gender)
+            driver.nation=request.data("nation", driver.nation)
+            driver.current_constructor=request.data("current_constructor", driver.current_constructor)
+            driver.about=request.data("about", driver.about)
+            driver.driver_image_url=request.data("driver_image_url", driver.driver_image_url)
             driver.save()
 
             serializer = DriverSerializer(driver)
             return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-        except driver.DoesNotExist:
+        except Driver.DoesNotExist:
             raise Http404("driver not found")
         except KeyError as e:
             return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
@@ -113,5 +118,5 @@ class DriverSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Driver
-        depth =1
-        fields = ('id', 'name', 'age', 'gender','nation_id', 'length', 'current_constructor_id', 'about', 'driver_image_url')
+        fields = ('id', 'name', 'age', 'gender','nation', 'current_constructor', 'about', 'driver_image_url')
+        depth = 3

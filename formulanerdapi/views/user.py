@@ -125,4 +125,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         depth =1
-        fields = ('id', 'uid', 'name', 'nation_id', 'favorite_driver_id', 'favorite_circuit_id')
+        fields = ('id', 'uid', 'name', 'nation', 'favorite_driver', 'favorite_circuit')

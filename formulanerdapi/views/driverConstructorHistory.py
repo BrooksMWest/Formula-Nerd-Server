@@ -106,4 +106,4 @@ class DriverConstructorHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = DriverConstructorHistory
         depth =1
-        fields = ('id', 'driver_id', 'constructor_id', 'start_year', 'end_year')
+        fields = ('id', 'driver', 'constructor', 'start_year', 'end_year')
