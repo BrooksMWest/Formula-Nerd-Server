@@ -113,4 +113,4 @@ class CircuitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Circuit
         depth =1
-        fields = ('id', 'name', 'nation_id', 'length', 'circuit_type', 'designer', 'year_built', 'circuit_image_url')
+        fields = ('id', 'name', 'nation', 'length', 'circuit_type', 'designer', 'year_built', 'circuit_image_url')

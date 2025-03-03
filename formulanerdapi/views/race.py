@@ -1,12 +1,9 @@
-from django.http import HttpResponseServerError
+from django.http import HttpResponseServerError, Http404
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from formulanerdapi.models import race
-from formulanerdapi.models import Nation
-from formulanerdapi.models import Race
+from formulanerdapi.models import Nation, Race, Driver, Circuit
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
 
 class RaceView(ViewSet):
     """Formula Nerd race view"""
@@ -17,10 +14,12 @@ class RaceView(ViewSet):
         Returns:
             Response -- JSON serialized race
         """
-        race = Race.objects.get(pk=pk)
-        serializer = RaceSerializer(race)
-        return Response(serializer.data)
-
+        try:
+            race = Race.objects.get(pk=pk)
+            serializer = RaceSerializer(race)
+            return Response(serializer.data)
+        except Race.DoesNotExist:
+            raise Http404("Race not found")
 
     def list(self, request):
         """Handle GET requests to get all races
@@ -29,7 +28,6 @@ class RaceView(ViewSet):
             Response -- JSON serialized list of races
         """
         races = Race.objects.all()
-
         serializer = RaceSerializer(races, many=True)
         return Response(serializer.data)
 
@@ -40,78 +38,109 @@ class RaceView(ViewSet):
             Response -- JSON serialized race instance or error message
         """
         try:
-            nation_id = request.data["nation_id"]
-            nation = Nation.objects.get(pk=nation_id)
+            nation = Nation.objects.get(pk=request.data["nation_id"])
+            circuit = Circuit.objects.get(pk=request.data["circuit_id"])
+            winner_driver = Driver.objects.get(pk=request.data["winner_driver_id"])
+            p2_driver = Driver.objects.get(pk=request.data["p2_driver_id"])
+            p3_driver = Driver.objects.get(pk=request.data["p3_driver_id"])
 
-            race = race.objects.create(
-            name=request.data["name"],
-            nation=nation,  
-            length=request.data["length"],
-            race_type=request.data["race_type"],
-            designer=request.data["designer"],
-            year_built=request.data["year_built"]
+            race = Race.objects.create(
+                name=request.data["name"],
+                circuit=circuit,
+                date=request.data["date"],
+                nation=nation,
+                distance=request.data["distance"],
+                laps=request.data["laps"],
+                winner_driver=winner_driver,
+                p2_driver=p2_driver,
+                p3_driver=p3_driver
             )     
 
             serializer = RaceSerializer(race)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        except KeyError as e:
-            # Handle missing fields
-          return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
-
-        except ObjectDoesNotExist:
-          return Response({"error": "race or related object not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except Nation.DoesNotExist:
+            return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except Circuit.DoesNotExist:
+            return Response({"error": "Circuit not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except Driver.DoesNotExist:
+            return Response({"error": "Driver not found."}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-        # Catch-all for any other errors
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    
 
     def update(self, request, pk):
         """Handle PUT requests for a race
 
         Returns:
-            Response -- Empty body with 204 status code or error message
+            Response -- Updated race instance or error message
         """
         try:
-            race = race.objects.get(pk=pk)
+            race = Race.objects.get(pk=pk)
 
-            nation_id = request.data.get(pk=nation_id)
-            if nation_id:
+            if "nation_id" in request.data:
                 try:
-                    nation = Nation.objects.get("nation_id")
+                    nation = Nation.objects.get(pk=request.data["nation_id"])
                     race.nation = nation
                 except Nation.DoesNotExist:
                     return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
-                
-            race.name = request.data.get["name", race.name]
-            race.length=request.data["length", race.length]
-            race.race_type=request.data["race_type", race.race_type]
-            race.designer=request.data["designer", race.designer]
-            race.year_built=request.data["year_built", race.year_built]
-            race.race_image_url=request.data["race_image_url", race.race_image_url]
-            race.save()
 
+            if "circuit_id" in request.data:
+                try:
+                    circuit = Circuit.objects.get(pk=request.data["circuit_id"])
+                    race.circuit = circuit
+                except Circuit.DoesNotExist:
+                    return Response({"error": "Invalid circuit_id, circuit not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+            if "winner_driver_id" in request.data:
+                try:
+                    winner_driver = Driver.objects.get(pk=request.data["winner_driver_id"])
+                    race.winner_driver = winner_driver
+                except Driver.DoesNotExist:
+                    return Response({"error": "Invalid winner_driver_id, driver not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+            if "p2_driver_id" in request.data:
+                try:
+                    p2_driver = Driver.objects.get(pk=request.data["p2_driver_id"])
+                    race.p2_driver = p2_driver
+                except Driver.DoesNotExist:
+                    return Response({"error": "Invalid p2_driver_id, driver not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+            if "p3_driver_id" in request.data:
+                try:
+                    p3_driver = Driver.objects.get(pk=request.data["p3_driver_id"])
+                    race.p3_driver = p3_driver
+                except Driver.DoesNotExist:
+                    return Response({"error": "Invalid p3_driver_id, driver not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+            race.name = request.data.get("name", race.name)
+            race.date = request.data.get("date", race.date)
+            race.distance = request.data.get("distance", race.distance)
+            race.laps = request.data.get("laps", race.laps)
+
+            race.save()
             serializer = RaceSerializer(race)
-            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-        except race.DoesNotExist:
-            raise Http404("race not found")
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Race.DoesNotExist:
+            raise Http404("Race not found")
         except KeyError as e:
             return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
-        
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     def destroy(self, request, pk):
+        """Handle DELETE requests for a race"""
         try:
-            race = race.objects.get(pk=pk)
+            race = Race.objects.get(pk=pk)
             race.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
-        except race.DoesNotExist:
-            raise Http404("race not found")
+        except Race.DoesNotExist:
+            raise Http404("Race not found")
 
 class RaceSerializer(serializers.ModelSerializer):
-    """JSON serializer for races
-    """
+    """JSON serializer for races"""
     class Meta:
-        model = race
-        depth =1
-        fields = ('id', 'name', 'nation_id', 'length', 'race_type', 'designer', 'year_built', 'race_image_url')
+        model = Race
+        depth = 3
+        fields = ('id', 'name', 'circuit', 'date', 'nation', 'distance', 'laps', 'winner_driver', 'p2_driver', 'p3_driver')

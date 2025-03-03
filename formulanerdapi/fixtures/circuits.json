@@ -63,5 +63,96 @@
         "year_built": "1940",
         "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Interlagos_track_map.png"
     }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 6,
+  "fields": {
+      "name": "Albert Park",
+      "nation_id": 1,
+      "length": "5.278 km (3.280 miles)",
+      "circuit_type": "Street Circuit",
+      "designer": "Modified public roads",
+      "year_built": "1953",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Melbourne_Grand_Prix_Circuit_map.svg"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 7,
+  "fields": {
+      "name": "Circuit de Monaco",
+      "nation_id": 10,
+      "length": "3.337 km (2.074 miles)",
+      "circuit_type": "Street Circuit",
+      "designer": "Anthony Noghes",
+      "year_built": "1929",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Monte_Carlo_Formula_1_track_map.svg"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 8,
+  "fields": {
+      "name": "Circuit of the Americas",
+      "nation_id": 5,
+      "length": "5.513 km (3.426 miles)",
+      "circuit_type": "Race Track",
+      "designer": "Hermann Tilke",
+      "year_built": "2012",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Circuit_of_the_Americas_track_map.svg"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 9,
+  "fields": {
+      "name": "Yas Marina",
+      "nation_id": 3,
+      "length": "5.281 km (3.281 miles)",
+      "circuit_type": "Race Track",
+      "designer": "Hermann Tilke",
+      "year_built": "2009",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Yas_Marina_Circuit.png"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 10,
+  "fields": {
+      "name": "Jeddah Corniche Circuit",
+      "nation_id": 2,
+      "length": "6.174 km (3.837 miles)",
+      "circuit_type": "Street Circuit",
+      "designer": "Hermann Tilke",
+      "year_built": "2021",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Jeddah_Street_Circuit_2021.svg"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 11,
+  "fields": {
+      "name": "Bahrain International Circuit",
+      "nation_id": 2,
+      "length": "5.412 km (3.363 miles)",
+      "circuit_type": "Race Track",
+      "designer": "Hermann Tilke",
+      "year_built": "2004",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Bahrain_International_Circuit_2020_layout.svg"
+  }
+},
+{
+  "model": "formulanerdapi.circuit",
+  "pk": 12,
+  "fields": {
+      "name": "Autódromo Hermanos Rodríguez",
+      "nation_id": 7,
+      "length": "4.304 km (2.674 miles)",
+      "circuit_type": "Race Track",
+      "designer": "Roger Penske (original layout)",
+      "year_built": "1962",
+      "circuit_image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Circuito_Hermanos_Rodríguez_2015.png"
+  }
 }
 ]

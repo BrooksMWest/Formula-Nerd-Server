@@ -108,8 +108,7 @@ class ConstructorView(ViewSet):
 class ConstructorSerializer(serializers.ModelSerializer):
     """JSON serializer for constructors
     """
-    nation_id = serializers.PrimaryKeyRelatedField(source='nation', read_only=True)
     class Meta:
         model = Constructor
-        depth =1
-        fields = ('id', 'name', 'location', 'nation_id', 'is_engine_manufacturer', 'about','constructor_image_url')
+        depth =2
+        fields = ('id', 'name', 'location', 'nation', 'is_engine_manufacturer', 'about','constructor_image_url')
