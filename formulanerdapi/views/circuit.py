@@ -11,7 +11,12 @@ class CircuitView(ViewSet):
     """Level up circuit view"""
 
     def retrieve(self, request, pk):
-        """Handle GET requests for single circuit
+        """Handle GET requests for single circuit by id
+          get circuits by nation
+          get circuits by name
+          get circuits by type (maybe - might ditch it - no circuit table)
+          get circuits by user favorites
+
 
         Returns:
             Response -- JSON serialized circuit
@@ -27,7 +32,12 @@ class CircuitView(ViewSet):
         Returns:
             Response -- JSON serialized list of circuits
         """
+        nation = request.query_params.get('nation', None)
+
         circuits = Circuit.objects.all()
+
+        if nation is not None:
+            circuits = circuits.filter(nation=nation)
 
         serializer = CircuitSerializer(circuits, many=True)
         return Response(serializer.data)
@@ -48,7 +58,8 @@ class CircuitView(ViewSet):
             length=request.data["length"],
             circuit_type=request.data["circuit_type"],
             designer=request.data["designer"],
-            year_built=request.data["year_built"]
+            year_built=request.data["year_built"],
+            circuit_image_url=request.data["circuit_image_url"]
             )     
 
             serializer = CircuitSerializer(circuit)

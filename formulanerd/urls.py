@@ -29,7 +29,7 @@ router.register(r'drivers', DriverView, 'driver')
 router.register(r'circuits', CircuitView, 'circuit')
 router.register(r'races', RaceView, 'race')
 router.register(r'constructors', ConstructorView, 'constructor')
-router.register(r'driver_constructor_histories', DriverConstructorHistoryView, 'driver_constructor_history')
+router.register(r'driverconstructorhistories', DriverConstructorHistoryView, 'driver_constructor_history')
 router.register(r'nations', NationView, 'nation')
 
 urlpatterns = [
