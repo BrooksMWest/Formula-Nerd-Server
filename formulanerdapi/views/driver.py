@@ -41,9 +41,9 @@ class DriverView(ViewSet):
         """
         try:
             nation_id = request.data["nation_id"]
-            constructor_id = request.data["constructor_id"]
+            current_constructor_id = request.data["current_constructor_id"]
 
-            current_constructor = Constructor.objects.get(pk=constructor_id)
+            current_constructor = Constructor.objects.get(pk=current_constructor_id)
             nation = Nation.objects.get(pk=nation_id)
 
             driver = Driver.objects.create(

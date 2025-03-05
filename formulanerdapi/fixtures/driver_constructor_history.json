@@ -1,72 +1,72 @@
 [
   {
-    "model": "formulanerdapi.driver_constructor_history",
+    "model": "formulanerdapi.driverconstructorhistory",
     "pk": 1,
     "fields": {
         "driver_id": 1,
         "constructor_id": 3,
         "start_year": 2007,
-        "end year": 2012
+        "end_year": 2012
     }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
+  "model": "formulanerdapi.driverconstructorhistory",
   "pk": 1,
   "fields": {
       "driver_id": 1,
       "constructor_id": 2,
       "start_year": 2013,
-      "end year": 2024
+      "end_year": 2024
   }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
+  "model": "formulanerdapi.driverconstructorhistory",
   "pk": 1,
   "fields": {
       "driver_id": 1,
       "constructor_id": 2,
       "start_year": 2012,
-      "end year": null
+      "end_year": null
   }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
-  "pk": 1,
+  "model": "formulanerdapi.driverconstructorhistory",
+  "pk": 2,
   "fields": {
       "driver_id": 2,
       "constructor_id": 5,
       "start_year": 2016,
-      "end year": null
+      "end_year": null
   }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
-  "pk": 1,
+  "model": "formulanerdapi.driverconstructorhistory",
+  "pk": 3,
   "fields": {
       "driver_id": 3,
       "constructor_id": 2,
       "start_year": 2019,
-      "end year": null
+      "end_year": null
   }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
-  "pk": 1,
+  "model": "formulanerdapi.driverconstructorhistory",
+  "pk": 4,
   "fields": {
       "driver_id": 4,
       "constructor_id": 5,
       "start_year": 2021,
-      "end year": 2024
+      "end_year": 2024
   }
 },
 {
-  "model": "formulanerdapi.driver_constructor_history",
-  "pk": 1,
+  "model": "formulanerdapi.driverconstructorhistory",
+  "pk": 5,
   "fields": {
       "driver_id": 4,
       "constructor_id": 3,
       "start_year": 2013,
-      "end year": 2014
+      "end_year": 2014
   }
 }
 ]

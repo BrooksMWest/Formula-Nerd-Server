@@ -100,10 +100,7 @@ class DriverConstructorHistoryView(ViewSet):
 class DriverConstructorHistorySerializer(serializers.ModelSerializer):
     """JSON serializer for driver constructor history"""
 
-    driver_id = serializers.PrimaryKeyRelatedField(queryset=Driver.objects.all())
-    constructor_id = serializers.PrimaryKeyRelatedField(queryset=Constructor.objects.all())
-
     class Meta:
         model = DriverConstructorHistory
-        depth =1
+        depth = 2
         fields = ('id', 'driver', 'constructor', 'start_year', 'end_year')
