@@ -87,24 +87,26 @@ class CircuitView(ViewSet):
         try:
             circuit = Circuit.objects.get(pk=pk)
 
-            nation_id = request.data.get(pk=nation_id)
+            nation_id = request.data.get("nation_id")
             if nation_id:
                 try:
-                    nation = Nation.objects.get("nation_id")
+                    nation = Nation.objects.get(id=nation_id)
                     circuit.nation = nation
                 except Nation.DoesNotExist:
                     return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
                 
-            circuit.name = request.data.get["name", circuit.name]
-            circuit.length=request.data["length", circuit.length]
-            circuit.circuit_type=request.data["circuit_type", circuit.circuit_type]
-            circuit.designer=request.data["designer", circuit.designer]
-            circuit.year_built=request.data["year_built", circuit.year_built]
-            circuit.circuit_image_url=request.data["circuit_image_url", circuit.circuit_image_url]
+            circuit.name = request.data.get("name", circuit.name)
+            circuit.length=request.data.get("length", circuit.length)
+            circuit.circuit_type=request.data.get("circuit_type", circuit.circuit_type)
+            circuit.designer=request.data.get("designer", circuit.designer)
+            circuit.year_built=request.data.get("year_built", circuit.year_built)
+            circuit.circuit_image_url=request.data.get("circuit_image_url", circuit.circuit_image_url)
+
             circuit.save()
 
             serializer = CircuitSerializer(circuit)
-            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
         except circuit.DoesNotExist:
             raise Http404("circuit not found")
         except KeyError as e:
