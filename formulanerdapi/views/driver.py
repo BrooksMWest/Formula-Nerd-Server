@@ -89,13 +89,20 @@ class DriverView(ViewSet):
                 except Nation.DoesNotExist:
                     return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
                 
+            current_constructor_id = request.data.get("current_constructor_id")
+            if current_constructor_id:
+                try:
+                    current_constructor = Constructor.objects.get(pk=current_constructor_id)
+                    driver.current_constructor = current_constructor
+                except Constructor.DoesNotExist:
+                    return Response({"error": "Invalid current_constructor_id, constructor not found."}, status=status.HTTP_400_BAD_REQUEST)
+                
             driver.name = request.data.get("name", driver.name)
-            driver.age=request.data("age", driver.age)
-            driver.gender=request.data("gender", driver.gender)
-            driver.nation=request.data("nation", driver.nation)
-            driver.current_constructor=request.data("current_constructor", driver.current_constructor)
-            driver.about=request.data("about", driver.about)
-            driver.driver_image_url=request.data("driver_image_url", driver.driver_image_url)
+            driver.age=request.data.get("age", driver.age)
+            driver.gender=request.data.get("gender", driver.gender)
+            driver.nation=request.data.get("nation", driver.nation)
+            driver.about=request.data.get("about", driver.about)
+            driver.driver_image_url=request.data.get("driver_image_url", driver.driver_image_url)
             driver.save()
 
             serializer = DriverSerializer(driver)

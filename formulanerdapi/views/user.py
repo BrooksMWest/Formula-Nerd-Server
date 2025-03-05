@@ -103,9 +103,22 @@ class UserView(ViewSet):
                 
             user.uid = request.data.get("uid", user.uid)
             user.name = request.data.get("name", user.name)
-            user.nation=request.data.get("nation_id", user.nation)
-            user.favorite_driver=request.data("favorite_driver_id", user.favorite_driver)
-            user.favorite_circuit.data("favorite_circuit_id", user.favorite_circuit)
+            favorite_driver_id = request.data.get("favorite_driver_id")
+            if favorite_driver_id:
+                try:
+                    favorite_driver = Driver.objects.get(pk=favorite_driver_id)
+                    user.favorite_driver = favorite_driver
+                except Driver.DoesNotExist:
+                    return Response({"error": "Invalid favorite_driver_id, driver not found."}, status=status.HTTP_400_BAD_REQUEST)
+        
+            favorite_circuit_id = request.data.get("favorite_circuit_id")
+            if favorite_circuit_id:
+                try:
+                    favorite_circuit = Circuit.objects.get(pk=favorite_circuit_id)
+                    user.favorite_circuit = favorite_circuit
+                except Circuit.DoesNotExist:
+                    return Response({"error": "Invalid favorite_circuit_id, circuit not found."}, status=status.HTTP_400_BAD_REQUEST)
+
             user.save()
 
             serializer = UserSerializer(user)
