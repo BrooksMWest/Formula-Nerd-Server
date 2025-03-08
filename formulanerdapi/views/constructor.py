@@ -26,7 +26,12 @@ class ConstructorView(ViewSet):
         Returns:
             Response -- JSON serialized list of constructors
         """
+        nation = request.query_params.get('nation', None)
+
         constructors = Constructor.objects.all()
+
+        if nation is not None:
+            constructors = constructors.filter(nation=nation)
 
         serializer = ConstructorSerializer(constructors, many=True)
         return Response(serializer.data)

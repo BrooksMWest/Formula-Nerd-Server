@@ -28,7 +28,12 @@ class DriverView(ViewSet):
         Returns:
             Response -- JSON serialized list of drivers
         """
+        nation = request.query_params.get('nation', None)
+
         drivers = Driver.objects.all()
+
+        if nation is not None:
+            drivers = drivers.filter(nation=nation)
 
         serializer = DriverSerializer(drivers, many=True)
         return Response(serializer.data)

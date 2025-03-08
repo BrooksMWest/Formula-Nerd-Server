@@ -27,7 +27,13 @@ class RaceView(ViewSet):
         Returns:
             Response -- JSON serialized list of races
         """
+        nation = request.query_params.get('nation', None)
+
         races = Race.objects.all()
+
+        if nation is not None:
+            races = races.filter(nation=nation)
+
         serializer = RaceSerializer(races, many=True)
         return Response(serializer.data)
 
