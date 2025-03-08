@@ -30,11 +30,18 @@ class DriverConstructorHistoryView(ViewSet):
         Returns:
             Response -- JSON serialized list of circuits
         """
+        driver = request.query_params.get('driver', None)
+        constructor = request.query_params.get('constructor', None)
+
         driverConstructorHistories = DriverConstructorHistory.objects.all()
+
+        if driver is not None:
+            driverConstructorHistories = driverConstructorHistories.filter(driver=driver)
+        if constructor is not None:
+            driverConstructorHistories = driverConstructorHistories.filter(constructor=constructor)
 
         serializer = DriverConstructorHistorySerializer(driverConstructorHistories, many=True)
         return Response(serializer.data)
-
     def create(self, request):
         """Handle POST operations"""
         try:

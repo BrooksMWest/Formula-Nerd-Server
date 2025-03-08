@@ -26,7 +26,12 @@ class ConstructorView(ViewSet):
         Returns:
             Response -- JSON serialized list of constructors
         """
+        nation = request.query_params.get('nation', None)
+
         constructors = Constructor.objects.all()
+
+        if nation is not None:
+            constructors = constructors.filter(nation=nation)
 
         serializer = ConstructorSerializer(constructors, many=True)
         return Response(serializer.data)
@@ -85,13 +90,17 @@ class ConstructorView(ViewSet):
                 
             constructor.name = request.data.get("name", constructor.name)
             constructor.location = request.data.get("location", constructor.location)
-            constructor.is_engine_manufacturer = request.data.get("is_engine_manufacturer", constructor.is_engine_manufacturer)
+            is_engine_manufacturer = request.data.get("is_engine_manufacturer")
+            if is_engine_manufacturer is not None:
+                constructor.is_engine_manufacturer = is_engine_manufacturer in ("true", "True", True)
+            
             constructor.about = request.data.get("about", constructor.about)
             constructor.constructor_image_url = request.data.get("constructor_image_url", constructor.constructor_image_url)
             constructor.save()
 
             serializer = ConstructorSerializer(constructor)
-            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
         except Constructor.DoesNotExist:
             raise Http404("constructor not found")
         except KeyError as e:
