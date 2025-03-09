@@ -5,31 +5,51 @@ from rest_framework import serializers, status
 from formulanerdapi.models import Nation
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from rest_framework.exceptions import NotFound
 
+    
 class NationView(ViewSet):
-    """Formula Nerd Nation view"""
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for a single nation"""
+        try:
+            nation = Nation.objects.get(pk=pk)
+            serializer = NationSerializer(nation)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Nation.DoesNotExist:
+            return Response({"error": "Nation not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    def retrieve(self, request, pk):
-        """Handle GET requests for single nation
-
-        Returns:
-            Response -- JSON serialized nation
-        """
-        nation = Nation.objects.get(pk=pk)
-        serializer = NationSerializer(nation)
-        return Response(serializer.data)
-
-
+    
     def list(self, request):
         """Handle GET requests to get all nations
 
         Returns:
             Response -- JSON serialized list of nations
         """
-        nations = Nation.objects.all()
+        try:
+            # Attempt to retrieve all nations
+            nations = Nation.objects.all()
+            if not nations.exists():
+                    # If no nations are found, return a 404 Not Found response
+                raise NotFound(detail="No nations found")
 
-        serializer = NationSerializer(nations, many=True)
-        return Response(serializer.data)
+            # Serialize the nation data
+            serializer = NationSerializer(nations, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        except NotFound as nf_error:
+                # Handle the case when no nations are found
+            return Response(
+                {"detail": nf_error.detail},
+                status=status.HTTP_404_NOT_FOUND
+        )
+        
+        except Exception as e:
+                # Handle unexpected exceptions (e.g., database issues)
+            return Response(
+                {"detail": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )      
+
 
     def create(self, request):
         """Handle POST operations

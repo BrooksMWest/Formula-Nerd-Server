@@ -1,6 +1,7 @@
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 from rest_framework import serializers, status
 from formulanerdapi.models import Driver
 from formulanerdapi.models import Constructor
@@ -17,7 +18,11 @@ class DriverView(ViewSet):
         Returns:
             Response -- JSON serialized driver
         """
-        driver = Driver.objects.get(pk=pk)
+        try:
+            driver = Driver.objects.get(pk=pk)
+        except Driver.DoesNotExist:
+            return Response({"error": "Driver not Found"}, status=status.HTTP_404_NOT_FOUND)
+        
         serializer = DriverSerializer(driver)
         return Response(serializer.data)
 
@@ -65,14 +70,17 @@ class DriverView(ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except KeyError as e:
-            # Handle missing fields
-          return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+        # Handle missing fields
+            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
-        except ObjectDoesNotExist:
-          return Response({"error": "driver or related object not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except Nation.DoesNotExist:
+            return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+        except Constructor.DoesNotExist:
+            return Response({"error": "Constructor not found."}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-        # Catch-all for any other errors
+            # Catch all other errors
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     
