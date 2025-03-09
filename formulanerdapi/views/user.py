@@ -8,19 +8,30 @@ from formulanerdapi.models import Nation
 from formulanerdapi.models import Circuit
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from rest_framework.exceptions import NotFound
 
 class UserView(ViewSet):
     """Formula Nerd user view"""
 
-    def retrieve(self, request, pk):
-        """Handle GET requests for single user
+
+    def retrieve(self, request, pk=None):
+        """Handle GET operations for retrieving a user by their primary key (id)
 
         Returns:
-            Response -- JSON serialized user
+            Response -- JSON serialized user instance or error message
         """
-        user = User.objects.get(pk=pk)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+        try:
+            user = User.objects.get(pk=pk)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+
+        except User.DoesNotExist:
+            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            # Catch any other errors
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
     def list(self, request):
@@ -45,6 +56,14 @@ class UserView(ViewSet):
             favorite_driver = None
             favorite_circuit = None
 
+            # Check for required fields
+            if "uid" not in request.data:
+                return Response({"error": "Missing field: 'uid'"}, status=status.HTTP_400_BAD_REQUEST)
+
+            if "name" not in request.data:
+                return Response({"error": "Missing field: 'name'"}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Optional fields that can be left out
             if "nation_id" in request.data:
                 nation = Nation.objects.get(pk=request.data["nation_id"])
 
@@ -54,22 +73,26 @@ class UserView(ViewSet):
             if "favorite_circuit_id" in request.data:
                 favorite_circuit = Circuit.objects.get(pk=request.data["favorite_circuit_id"])
 
+            # Ensure that all required fields are provided
+            if not favorite_circuit:  # If favorite_circuit is None, it means the field wasn't provided
+                return Response({"error": "Missing field: 'favorite_circuit_id'"}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Create the user
             user = User.objects.create(
-            uid=request.data["uid"],
-            name=request.data["name"],
-            nation=nation,
-            favorite_driver=favorite_driver,
-            favorite_circuit=favorite_circuit
+                uid=request.data["uid"],
+                name=request.data["name"],
+                nation=nation,
+                favorite_driver=favorite_driver,
+                favorite_circuit=favorite_circuit
             )     
 
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except KeyError as e:
-            # Handle missing fields
-          return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+            # Catch any missing fields that may not have been handled above
+            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
-        
         except Nation.DoesNotExist:
             return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
         except Driver.DoesNotExist:
@@ -77,12 +100,10 @@ class UserView(ViewSet):
         except Circuit.DoesNotExist:
             return Response({"error": "Circuit not found."}, status=status.HTTP_400_BAD_REQUEST)
 
-
         except Exception as e:
-        # Catch-all for any other errors
+            # Catch-all for any other errors
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
 
     def update(self, request, pk):
         """Handle PUT requests for a user

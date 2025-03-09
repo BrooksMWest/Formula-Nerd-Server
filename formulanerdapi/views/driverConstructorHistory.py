@@ -44,6 +44,14 @@ class DriverConstructorHistoryView(ViewSet):
         return Response(serializer.data)
     def create(self, request):
         """Handle POST operations"""
+
+        required_fields = ["driver_id", "constructor_id", "start_year", "end_year"]
+    
+        # Check for missing required fields
+        for field in required_fields:
+            if field not in request.data:
+                return Response({"error": f"Missing field: '{field}'"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             driver = Driver.objects.get(pk=request.data["driver_id"])
             constructor = Constructor.objects.get(pk=request.data["constructor_id"])
@@ -63,7 +71,7 @@ class DriverConstructorHistoryView(ViewSet):
         except Constructor.DoesNotExist:
             return Response({"error": "Constructor not found"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
-            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": f"Missing field: '{str(e)}'"}, status=status.HTTP_400_BAD_REQUEST)
 
 
     def update(self, request, pk):
