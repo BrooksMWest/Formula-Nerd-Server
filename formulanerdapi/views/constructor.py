@@ -15,7 +15,10 @@ class ConstructorView(ViewSet):
         Returns:
             Response -- JSON serialized constructor
         """
-        constructor = Constructor.objects.get(pk=pk)
+        try:
+            constructor = Constructor.objects.get(pk=pk)
+        except Constructor.DoesNotExist:
+            return Response({"error": "Constructor not found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ConstructorSerializer(constructor)
         return Response(serializer.data)
 
@@ -43,6 +46,16 @@ class ConstructorView(ViewSet):
             Response -- JSON serialized constructor instance or error message
         """
         try:
+            # Extract the nation_id from request data
+            nation_id = request.data["nation_id"]
+        
+            # Try to fetch the nation using the provided nation_id
+            try:
+                nation = Nation.objects.get(pk=nation_id)
+            except Nation.DoesNotExist:
+                return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+
             nation_id = request.data["nation_id"]
             nation = Nation.objects.get(pk=nation_id)
 

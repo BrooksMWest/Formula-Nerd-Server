@@ -21,7 +21,12 @@ class CircuitView(ViewSet):
         Returns:
             Response -- JSON serialized circuit
         """
-        circuit = Circuit.objects.get(pk=pk)
+
+        try:
+            circuit = Circuit.objects.get(pk=pk)
+        except Circuit.DoesNotExist:
+            return Response({"error": "Circuit not found"}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = CircuitSerializer(circuit)
         return Response(serializer.data)
 
@@ -49,34 +54,37 @@ class CircuitView(ViewSet):
             Response -- JSON serialized circuit instance or error message
         """
         try:
+            # Extract the nation_id from request data
             nation_id = request.data["nation_id"]
-            nation = Nation.objects.get(pk=nation_id)
+        
+            # Try to fetch the nation using the provided nation_id
+            try:
+                nation = Nation.objects.get(pk=nation_id)
+            except Nation.DoesNotExist:
+                return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
 
+            # Create the new circuit instance
             circuit = Circuit.objects.create(
-            name=request.data["name"],
-            nation=nation,  
-            length=request.data["length"],
-            circuit_type=request.data["circuit_type"],
-            designer=request.data["designer"],
-            year_built=request.data["year_built"],
-            circuit_image_url=request.data["circuit_image_url"]
+                name=request.data["name"],
+                nation=nation,  
+                length=request.data["length"],
+                circuit_type=request.data["circuit_type"],
+                designer=request.data["designer"],
+                year_built=request.data["year_built"],
+                circuit_image_url=request.data["circuit_image_url"]
             )     
 
+            # Serialize the circuit instance
             serializer = CircuitSerializer(circuit)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except KeyError as e:
             # Handle missing fields
-          return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
-
-        except ObjectDoesNotExist:
-          return Response({"error": "circuit or related object not found."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-        # Catch-all for any other errors
+            # Catch-all for any other errors
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    
 
     def update(self, request, pk):
         """Handle PUT requests for a circuit
@@ -94,23 +102,29 @@ class CircuitView(ViewSet):
                     circuit.nation = nation
                 except Nation.DoesNotExist:
                     return Response({"error": "Invalid nation_id, nation not found."}, status=status.HTTP_400_BAD_REQUEST)
-                
-            circuit.name = request.data.get("name", circuit.name)
-            circuit.length=request.data.get("length", circuit.length)
-            circuit.circuit_type=request.data.get("circuit_type", circuit.circuit_type)
-            circuit.designer=request.data.get("designer", circuit.designer)
-            circuit.year_built=request.data.get("year_built", circuit.year_built)
-            circuit.circuit_image_url=request.data.get("circuit_image_url", circuit.circuit_image_url)
 
+            # Update the circuit fields with the provided data or keep the existing value if not provided
+            circuit.name = request.data.get("name", circuit.name)
+            circuit.length = request.data.get("length", circuit.length)
+            circuit.circuit_type = request.data.get("circuit_type", circuit.circuit_type)
+            circuit.designer = request.data.get("designer", circuit.designer)
+            circuit.year_built = request.data.get("year_built", circuit.year_built)
+            circuit.circuit_image_url = request.data.get("circuit_image_url", circuit.circuit_image_url)
+
+            # Save the updated circuit
             circuit.save()
 
+            # Serialize the updated circuit data
             serializer = CircuitSerializer(circuit)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        
-        except circuit.DoesNotExist:
-            raise Http404("circuit not found")
+            return Response(serializer.data, status=status.HTTP_200_OK)  # Change to 200 OK
+
+        except Circuit.DoesNotExist:
+            return Response({"error": "Circuit not found"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
             return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         
     def destroy(self, request, pk):
         try:

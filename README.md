@@ -1,10 +1,9 @@
-# Self-Assess Your Django Competencies
 
-## 🐟 Tuna Piano API
 
-This API enables developers to create applications that provide song recommendations based on genre. It manages non-user specific data, including artists, their songs, and the associated genre for each song.
+## Formula Nerd API
+This API enables developers to maintain a database which keeps track of many of the important facets of Formula 1 racing. It manages non-user specific data, including drivers, constructors, racing circuits, and the Grands Prix (races) that take place at those circuits all over the world. It also allows users to see the histories between drivers and constructors. 
 
-Let's make millions! 💰 💰 💰
+Let's drive! 
 
 ### Setup
 
@@ -29,7 +28,7 @@ These are all the available routes for this API. Each route has an associated ti
   - JSON body (if applicable).
   - Status code.
 
-#### 🎶 Songs
+#### Circuits
 
 - [Create a Song](./documentation/issue-tickets/Create-Song.md)
 - [Delete a Song](./documentation/issue-tickets/Delete-Song.md)
@@ -37,7 +36,7 @@ These are all the available routes for this API. Each route has an associated ti
 - [View a List of all the Songs](./documentation/issue-tickets/List-Songs.md)
 - [Details view of a single Song and its associated genres and artist details](./documentation/issue-tickets/Details-Song.md)
 
-#### 👩🏾‍🎤 Artists
+#### Constructors
 
 - [Create an Artist](./documentation/issue-tickets/Create-an-Artist.md)
 - [Delete an Artist](./documentation/issue-tickets/Delete-an-Artist.md)
@@ -45,13 +44,21 @@ These are all the available routes for this API. Each route has an associated ti
 - [View a List of all the Artists](./documentation/issue-tickets/List-Artists.md)
 - [Details view of a single Artist and the songs associated with them](./documentation/issue-tickets/Details-Artist.md)
 
-#### 🎸 Genres
+#### Drivers
 
 - [Create a Genre](./documentation/issue-tickets/Create-Genre.md)
 - [Delete a Genre](./documentation/issue-tickets/Delete-Genre.md)
 - [Update a Genre](./documentation/issue-tickets/Update-Genre.md)
 - [View a List of all the Genres](./documentation/issue-tickets/List-Genres.md)
 - [Details view of a single Genre and the songs associated with it](./documentation/issue-tickets/Details-Genre.md)
+
+#### Nations
+
+#### Races
+
+#### Drivers
+
+#### Driver Constructor Histories
 
 ### Stretch Goals
 
