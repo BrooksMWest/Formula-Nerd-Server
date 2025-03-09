@@ -49,29 +49,37 @@ class DriverView(ViewSet):
         Returns:
             Response -- JSON serialized driver instance or error message
         """
+        required_fields = [
+            "name", "age", "gender", "nation_id", "current_constructor_id", "about", "driver_image_url"
+        ]
+    
+        # Check for missing required fields
+        for field in required_fields:
+            if field not in request.data:
+                return Response({"error": f"Missing field: {field}"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
+            # Retrieve nation and constructor, handle cases where they are not found
             nation_id = request.data["nation_id"]
             current_constructor_id = request.data["current_constructor_id"]
 
             current_constructor = Constructor.objects.get(pk=current_constructor_id)
             nation = Nation.objects.get(pk=nation_id)
 
+            # Create driver instance
             driver = Driver.objects.create(
-            name=request.data["name"],
-            age=request.data["age"],
-            gender=request.data["gender"],
-            nation=nation,  
-            current_constructor=current_constructor,
-            about=request.data["about"],
-            driver_image_url=request.data["driver_image_url"]
+                name=request.data["name"],
+                age=request.data["age"],
+                gender=request.data["gender"],
+                nation=nation,  
+                current_constructor=current_constructor,
+                about=request.data["about"],
+                driver_image_url=request.data["driver_image_url"]
             )     
 
+            # Serialize the driver instance and return the response
             serializer = DriverSerializer(driver)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        except KeyError as e:
-        # Handle missing fields
-            return Response({"error": f"Missing field: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
         except Nation.DoesNotExist:
             return Response({"error": "Nation not found."}, status=status.HTTP_400_BAD_REQUEST)
@@ -80,10 +88,9 @@ class DriverView(ViewSet):
             return Response({"error": "Constructor not found."}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            # Catch all other errors
+           # Catch all other errors
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
 
     def update(self, request, pk):
         """Handle PUT requests for a driver

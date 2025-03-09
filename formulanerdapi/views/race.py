@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from formulanerdapi.models import Nation, Race, Driver, Circuit
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.exceptions import ValidationError
 
 class RaceView(ViewSet):
     """Formula Nerd race view"""
@@ -19,7 +20,7 @@ class RaceView(ViewSet):
             serializer = RaceSerializer(race)
             return Response(serializer.data)
         except Race.DoesNotExist:
-            raise Http404("Race not found")
+            return Response({"error": "Race not Found"}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
         """Handle GET requests to get all races
@@ -37,19 +38,29 @@ class RaceView(ViewSet):
         serializer = RaceSerializer(races, many=True)
         return Response(serializer.data)
 
+
     def create(self, request):
         """Handle POST operations
 
         Returns:
             Response -- JSON serialized race instance or error message
         """
+        required_fields = ["winner_driver_id", "p2_driver_id", "p3_driver_id"]
+    
+        # Check if all required fields are present
+        for field in required_fields:
+            if field not in request.data:
+                return Response({"error": f"Missing field: '{field}'"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
+         # Retrieve related objects
             nation = Nation.objects.get(pk=request.data["nation_id"])
             circuit = Circuit.objects.get(pk=request.data["circuit_id"])
             winner_driver = Driver.objects.get(pk=request.data["winner_driver_id"])
             p2_driver = Driver.objects.get(pk=request.data["p2_driver_id"])
             p3_driver = Driver.objects.get(pk=request.data["p3_driver_id"])
 
+            # Create the race instance
             race = Race.objects.create(
                 name=request.data["name"],
                 circuit=circuit,
@@ -71,9 +82,10 @@ class RaceView(ViewSet):
             return Response({"error": "Circuit not found."}, status=status.HTTP_400_BAD_REQUEST)
         except Driver.DoesNotExist:
             return Response({"error": "Driver not found."}, status=status.HTTP_400_BAD_REQUEST)
-
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        
 
     def update(self, request, pk):
         """Handle PUT requests for a race

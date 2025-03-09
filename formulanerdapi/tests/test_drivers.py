@@ -127,7 +127,7 @@ class DriverViewTests(APITestCase):
         }
         response = self.client.post("/drivers", data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data, {"error": "Missing field: 'driver_image_url'"})
+        self.assertEqual(response.data, {"error": "Missing field: driver_image_url"})
     
     def test_create_driver_with_invalid_nation(self):
         """Test creating a driver with an invalid nation"""
